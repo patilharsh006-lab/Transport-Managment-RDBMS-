@@ -1,1 +1,90 @@
+{% extends "base.html" %}
 
+{% block content %}
+<div class="container">
+    <h2 class="mb-4">Dashboard</h2>
+    
+    <div class="row">
+        <div class="col-md-3 mb-4">
+            <div class="card bg-primary text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Total Vehicles</h5>
+                    <p class="card-text display-4">{{ vehicles|length }}</p>
+                    <a href="{{ url_for('vehicles') }}" class="text-white">View Details →</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-3 mb-4">
+            <div class="card bg-success text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Total Drivers</h5>
+                    <p class="card-text display-4">{{ drivers|length }}</p>
+                    <a href="{{ url_for('drivers') }}" class="text-white">View Details →</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-3 mb-4">
+            <div class="card bg-info text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Total Routes</h5>
+                    <p class="card-text display-4">{{ routes|length }}</p>
+                    <a href="{{ url_for('routes') }}" class="text-white">View Details →</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-3 mb-4">
+            <div class="card bg-warning text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Total Bookings</h5>
+                    <p class="card-text display-4">{{ bookings|length }}</p>
+                    <a href="{{ url_for('bookings') }}" class="text-white">View Details →</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">Recent Bookings</h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Vehicle</th>
+                                    <th>Driver</th>
+                                    <th>Route</th>
+                                    <th>Date</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for booking in recent_bookings %}
+                                <tr>
+                                    <td>{{ booking.booking_id }}</td>
+                                    <td>{{ booking.vehicle.vehicle_number }}</td>
+                                    <td>{{ booking.driver.name }}</td>
+                                    <td>{{ booking.route.route_name }}</td>
+                                    <td>{{ booking.booking_date }}</td>
+                                    <td>
+                                        <span class="badge bg-{{ 'success' if booking.status == 'completed' else 'warning' if booking.status == 'pending' else 'danger' }}">
+                                            {{ booking.status }}
+                                        </span>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 mb-4">
