@@ -59,6 +59,11 @@ class Booking(db.Model):
     status = db.Column(db.String(20), default='pending')
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
+
+# Create database tables
+with app.app_context():
+    db.create_all()
+
 # Forms
 class VehicleForm(FlaskForm):
     vehicle_number = StringField('Vehicle Number', validators=[DataRequired()])
