@@ -48,43 +48,36 @@
 
     <div class="row">
         <div class="col-md-6 mb-4">
+            
             <div class="card">
                 <div class="card-header">
-                    <h5 class="card-title mb-0">Recent Bookings</h5>
+                    <h5 class="card-title mb-0">System Summary</h5>
                 </div>
                 <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Vehicle</th>
-                                    <th>Driver</th>
-                                    <th>Route</th>
-                                    <th>Date</th>
-                                    <th>Status</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for booking in recent_bookings %}
-                                <tr>
-                                    <td>{{ booking.booking_id }}</td>
-                                    <td>{{ booking.vehicle.vehicle_number }}</td>
-                                    <td>{{ booking.driver.name }}</td>
-                                    <td>{{ booking.route.route_name }}</td>
-                                    <td>{{ booking.booking_date }}</td>
-                                    <td>
-                                        <span class="badge bg-{{ 'success' if booking.status == 'completed' else 'warning' if booking.status == 'pending' else 'danger' }}">
-                                            {{ booking.status }}
-                                        </span>
-                                    </td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
+                    <ul class="list-group">
+                        <li class="list-group-item d-flex justify-content-between">
+                            Available Vehicles
+                            <span>{{ vehicles|length }}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between">
+                            Drivers
+                            <span>{{ drivers|length }}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between">
+                            Routes
+                            <span>{{ routes|length }}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between">
+                            Bookings
+                            <span>{{ bookings|length }}</span>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
+    </div>
+</div>
+
+{% endblock %}
 
         <div class="col-md-6 mb-4">
