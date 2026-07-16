@@ -5,6 +5,7 @@ from wtforms import StringField, IntegerField, SelectField, DateField, SubmitFie
 from wtforms.validators import DataRequired, NumberRange, Length, Regexp
 from datetime import datetime
 import os
+from dotenv import load_dotenv
 
 # Load environment variables
 load_dotenv()
