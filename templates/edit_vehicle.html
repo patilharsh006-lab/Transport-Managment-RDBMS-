@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">Edit Vehicle</h5>
+                </div>
+                <div class="card-body">
+                    <form method="POST">
+                        {{ form.csrf_token }}
+                        <div class="mb-3">
+                            {{ form.vehicle_number.label(class="form-label") }}
+                            {{ form.vehicle_number(class="form-control") }}
+                            {% if form.vehicle_number.errors %}
+                                {% for error in form.vehicle_number.errors %}
+                                    <div class="text-danger">{{ error }}</div>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                        <div class="mb-3">
+                            {{ form.vehicle_type.label(class="form-label") }}
+                            {{ form.vehicle_type(class="form-select") }}
+                            {% if form.vehicle_type.errors %}
+                                {% for error in form.vehicle_type.errors %}
+                                    <div class="text-danger">{{ error }}</div>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                        <div class="mb-3">
+                            {{ form.capacity.label(class="form-label") }}
+                            {{ form.capacity(class="form-control") }}
+                            {% if form.capacity.errors %}
+                                {% for error in form.capacity.errors %}
+                                    <div class="text-danger">{{ error }}</div>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <a href="{{ url_for('vehicles') }}" class="btn btn-secondary">Cancel</a>
+                            {{ form.submit(class="btn btn-primary", value="Update Vehicle") }}
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 
